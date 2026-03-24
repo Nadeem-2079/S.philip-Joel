@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,3 +13,328 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S. Philip Joel — Portfolio</title>
+    <meta name="description" content="Student entrepreneur from Chennai — turning ideas into brands, content into clients, and ambition into action.">
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Clash Display"', '"Cabinet Grotesk"', 'sans-serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-[#f0ede8] text-[#111110] font-body overflow-x-hidden">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loader-bg">
+        <div class="text-center">
+            <div class="font-display font-black text-[14px] text-[rgba(240,237,232,0.8)] tracking-[0.4em] uppercase">
+                Philip Joel S
+            </div>
+            <div class="mt-6 w-[220px] h-[1px] bg-white/5 mx-auto rounded overflow-hidden">
+                <div id="loader-progress" class="h-full bg-gradient-to-r from-transparent via-[#f5e642] to-transparent w-0 transition-all duration-100"></div>
+            </div>
+            <div class="mt-4 font-mono text-[10px] text-[rgba(240,237,232,0.3)] tracking-[0.2em]">
+                Loading Portfolio
+            </div>
+        </div>
+    </div>
+
+    <div id="app-content" class="opacity-0">
+        <!-- Navbar -->
+        <div id="navbar-wrapper" class="fixed top-0 left-0 right-0 z-[2000] flex justify-center pointer-events-none p-6 opacity-0 -translate-y-[100px]">
+            <nav id="navbar" class="nav-container rounded-full px-9 py-3 pointer-events-auto flex items-center md:gap-10 gap-4 max-w-[92vw]">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div id="logo" class="font-display font-black text-xl cursor-pointer tracking-tighter text-[#111110] relative flex items-center" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                        S. Philip<span class="text-[#ff5a1f]">.</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Links -->
+                <div class="nav-desktop-links flex gap-3 items-center">
+                    <button class="nav-link group" onclick="scrollToSection('about')"><div class="nav-link-active-bg group-hover:opacity-100"></div>About</button>
+                    <button class="nav-link group" onclick="scrollToSection('services')"><div class="nav-link-active-bg group-hover:opacity-100"></div>Services</button>
+                    <button class="nav-link group" onclick="scrollToSection('projects')"><div class="nav-link-active-bg group-hover:opacity-100"></div>Projects</button>
+                    <button class="nav-link group" onclick="scrollToSection('blog')"><div class="nav-link-active-bg group-hover:opacity-100"></div>Blog</button>
+                </div>
+
+                <!-- CTA -->
+                <div class="flex gap-4 items-center">
+                    <button onclick="scrollToSection('contact')" class="btn-primary text-sm px-6 py-2.5">Let's Talk →</button>
+                    <button id="mobile-toggle" class="nav-mobile-btn bg-[#111110] w-11 h-11 rounded-full flex flex-col items-center justify-center gap-1.5 border-none cursor-pointer md:hidden">
+                        <span class="h-[2.2px] bg-white w-[22px] rounded-sm"></span>
+                        <span class="h-[2.2px] bg-white w-[14px] rounded-sm"></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu-overlay">
+            <div class="flex flex-col gap-4">
+                <span class="text-[12px] uppercase tracking-[0.2em] opacity-50 font-semibold">Navigation</span>
+                <button class="mobile-link" onclick="scrollToSection('about')">About</button>
+                <button class="mobile-link" onclick="scrollToSection('services')">Services</button>
+                <button class="mobile-link" onclick="scrollToSection('projects')">Projects</button>
+                <button class="mobile-link" onclick="scrollToSection('blog')">Blog</button>
+            </div>
+            <div class="mt-auto flex justify-between items-end">
+                <div class="flex flex-col gap-2">
+                     <span class="text-xs opacity-50">Socials</span>
+                     <div class="flex gap-3">
+                       <a href="#" class="text-[#111110] font-semibold text-sm">In</a>
+                       <a href="#" class="text-[#111110] font-semibold text-sm">Tw</a>
+                       <a href="#" class="text-[#111110] font-semibold text-sm">Be</a>
+                     </div>
+                </div>
+                <div class="text-right">
+                     <p class="text-xs opacity-60">© 2026 Philip</p>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <!-- Hero -->
+            <section id="home" class="min-h-screen bg-[#f0ede8] flex items-center relative overflow-hidden py-24 md:py-0">
+                <div class="absolute -top-[10%] -right-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,var(--parchment)_0%,transparent_70%)] opacity-30 z-0"></div>
+                <div class="max-w-[1200px] mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 grid-cols-1 md:gap-16 gap-10 items-center relative z-10">
+                    <div>
+                        <h1 id="hero-title" class="hero-headline mb-5 opacity-0">
+                            I Build <span class="marker-yellow">Brands</span>,<br class="hidden md:block"/>
+                            Tell Stories &amp; Help<br class="hidden md:block"/>
+                            <span class="text-[#ff5a1f]">Businesses</span> Grow.
+                        </h1>
+                        <p id="hero-sub" class="text-base text-[#5a5753] leading-relaxed max-w-[420px] mb-8 opacity-0">
+                            Student entrepreneur from Chennai — turning ideas into brands, content into clients, and ambition into action.
+                        </p>
+                        <div id="hero-btns" class="flex flex-wrap gap-4 opacity-0">
+                            <button onclick="scrollToSection('contact')" class="btn-primary">Let's Work Together →</button>
+                            <button onclick="scrollToSection('projects')" class="btn-outline">See My Work ↓</button>
+                        </div>
+                    </div>
+                    <div id="hero-img-area" class="relative flex justify-center items-center opacity-0 mt-10 md:mt-0">
+                        <div class="absolute inset-0">
+                            <div class="float-anim absolute top-[5%] left-[5%]"><svg width="28" height="28" viewBox="0 0 32 32"><path d="M16 0 L17.5 14 L32 16 L17.5 18 L16 32 L14.5 18 L0 16 L14.5 14 Z" fill="#e8d800" /></svg></div>
+                            <div class="float-anim2 absolute top-[10%] right-[5%]"><svg width="18" height="18" viewBox="0 0 32 32"><path d="M16 0 L17.5 14 L32 16 L17.5 18 L16 32 L14.5 18 L0 16 L14.5 14 Z" fill="#111110" /></svg></div>
+                            <div class="float-anim absolute bottom-[15%] left-[0%]">
+                                <svg width="80" height="30" viewBox="0 0 80 30" fill="none"><path d="M4 15 Q14 4 24 15 Q34 26 44 15 Q54 4 64 15 Q74 26 84 15" stroke="#9a9590" stroke-width="2.5" fill="none" stroke-linecap="round" /></svg>
+                            </div>
+                            <div class="float-anim2 absolute bottom-[8%] right-[12%]"><svg width="22" height="22" viewBox="0 0 32 32"><path d="M16 0 L17.5 14 L32 16 L17.5 18 L16 32 L14.5 18 L0 16 L14.5 14 Z" fill="#ff5a1f" /></svg></div>
+                        </div>
+                        <div class="w-[280px] md:w-[320px] h-[380px] md:h-[420px] rounded-3xl overflow-hidden bg-gradient-to-br from-white to-[#e8e4dd] border-2 border-[#111110] shadow-[14px_14px_0_#111110] relative z-[50]">
+                            <img src="/hero.png" alt="S. Philip Joel" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute bottom-[20px] md:bottom-[30px] -left-5 md:-left-[25px] px-4 md:px-[18px] py-2 md:py-[10px] bg-white border-[1.5px] border-[#111110] rounded-xl shadow-[4px_4px_0_#111110] z-[60]">
+                            <div class="font-display font-black text-xl md:text-2xl text-[#ff5a1f] leading-none">10+</div>
+                            <div class="text-[9px] md:text-[10px] text-[#5a5753] mt-0.5">Happy Clients</div>
+                        </div>
+                        <div class="absolute top-[20px] md:top-[30px] -right-5 md:-right-[25px] px-4 md:px-[18px] py-2 md:py-[10px] bg-[#f5e642] border-[1.5px] border-[#111110] rounded-xl shadow-[4px_4px_0_#111110] z-[60]">
+                            <div class="font-display font-black text-xl md:text-2xl text-[#111110] leading-none">2×</div>
+                            <div class="text-[9px] md:text-[10px] text-[#2a2926] mt-0.5">Shark Tank Win</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section id="about" class="bg-white py-20 md:py-[120px] border-t-[1.5px] border-[#dbd6ce]">
+                <div class="max-w-[1280px] mx-auto px-6 md:px-12">
+                    <div class="flex items-center gap-3 mb-12">
+                        <span class="font-mono text-[11px] text-[#9a9590] tracking-[0.15em]">02 — ABOUT ME</span>
+                        <div class="flex-1 h-[1.5px] bg-[#dbd6ce]"></div>
+                    </div>
+                    <div class="grid md:grid-cols-2 grid-cols-1 md:gap-20 gap-16 items-start">
+                        <div class="md:sticky top-[100px]">
+                            <h2 id="about-heading" class="section-heading mb-9 opacity-0">Hey, I'm<br /><span class="marker-yellow">Philip.</span></h2>
+                            <div id="about-text" class="flex flex-col gap-6">
+                                <p class="text-[15px] text-[#5a5753] leading-relaxed opacity-0">I didn't start with a perfect plan. I started with a belief that students could build real businesses — not just participate in case studies. In March 2024, I helped establish Ausdauer Groups, a digital agency run entirely by students, out of Chennai. Within months, we had real clients, real revenue, and a real team of 20.</p>
+                                <p class="text-[15px] text-[#5a5753] leading-relaxed opacity-0">I wear multiple hats — Director, PR lead, content team leader, and sometimes the guy writing website copy at midnight. I've worked on brand strategy, cold outreach systems, website builds, Instagram content calendars, script writing for reels, and the legal backbone of a bootstrapped startup. All while sitting in engineering lectures.</p>
+                                <p class="text-[15px] text-[#5a5753] leading-relaxed opacity-0">I believe branding is clarity, content creates long-term trust, and consistency beats motivation every single time. I'm not here to look impressive. I'm here to grow, build in public, and help brands show up the way they deserve to.</p>
+                                <p class="text-[15px] text-[#5a5753] leading-relaxed opacity-0">When I'm not running the agency, I'm pitching at startup competitions (won a couple), networking at BNI, or figuring out how AI tools can make our work 10x faster. Big fan of learning by doing — always have been.</p>
+                            </div>
+                            <div class="mt-10 inline-flex flex-wrap items-center gap-2.5 px-5 py-2.5 bg-[#f0ede8] border-[1.5px] border-[#dbd6ce] rounded-full">
+                                <span class="text-[13px] text-[#2a2926] font-medium">B.E. Engineering Student</span>
+                                <span class="hidden md:block w-px h-3.5 bg-[#dbd6ce]"></span>
+                                <span class="text-[13px] text-[#5a5753]">Graduating 2027</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-7">
+                            <div class="w-full md:w-[85%] aspect-[1.3/1] rounded-3xl overflow-hidden bg-[#0a0a09] relative shadow-2xl mx-auto">
+                                <img src="/about.jpeg" alt="About Philip" class="w-full h-full object-cover">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="stat-card" data-val="10" data-suf="+">
+                                    <div class="stat-num font-display font-black text-4xl text-[#ff5a1f] mb-1.5">0+</div>
+                                    <div class="text-sm text-[#5a5753] font-medium">Clients Served</div>
+                                </div>
+                                <div class="stat-card" data-val="20" data-suf="">
+                                    <div class="stat-num font-display font-black text-4xl text-[#0f9b8e] mb-1.5">0</div>
+                                    <div class="text-sm text-[#5a5753] font-medium">Member Team</div>
+                                </div>
+                                <div class="stat-card" data-val="1.5" data-suf="+">
+                                    <div class="stat-num font-display font-black text-4xl text-[#6b4de6] mb-1.5">0+</div>
+                                    <div class="text-sm text-[#5a5753] font-medium">Years Running Agency</div>
+                                </div>
+                                <div class="stat-card" data-val="2" data-suf="×">
+                                    <div class="stat-num font-display font-black text-4xl text-[#e8d800] mb-1.5">0×</div>
+                                    <div class="text-sm text-[#5a5753] font-medium">Shark Tank Wins</div>
+                                </div>
+                            </div>
+                            <div class="p-8 bg-[#111110] rounded-[24px]">
+                                <p class="font-display font-bold text-xl text-[#f0ede8] leading-normal tracking-tight">"Consistency beats motivation every single time."</p>
+                                <div class="mt-4 text-xs text-[#f0ede8]/40 font-mono">— Philip Joel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Marquee -->
+            <div class="bg-[#111110] border-t-[1.5px] border-white/10 py-4 overflow-hidden relative z-10">
+                <div class="marquee-track" id="main-marquee">
+                    <!-- Injected by JS duplication for continuity -->
+                </div>
+            </div>
+
+            <!-- Services -->
+            <section id="services" class="bg-[#f0ede8] py-24 md:py-[120px] border-t-[1.5px] border-[#dbd6ce]">
+                <div class="max-w-[1280px] mx-auto px-6 md:px-12">
+                    <div class="flex items-center gap-3 mb-12">
+                        <span class="font-mono text-[11px] text-[#9a9590] tracking-[0.15em]">03 — SERVICES</span>
+                        <div class="flex-1 h-[1.5px] bg-[#dbd6ce]"></div>
+                    </div>
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+                        <h2 id="services-heading" class="section-heading opacity-0">What I<br /><span class="marker-yellow">do best.</span></h2>
+                        <div class="max-w-[340px]">
+                            <p class="text-[15px] text-[#5a5753] leading-relaxed mb-6">Starting from ₹5,000 — customised based on scope.</p>
+                            <a href="mailto:philipjoel1969@gmail.com" class="btn-primary text-[13px] px-6 py-3">Get a Quote →</a>
+                        </div>
+                    </div>
+                    <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Statially rendering first card, rest follow similar pattern or injected -->
+                        <div class="service-card opacity-0">
+                            <div class="flex items-start justify-between mb-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-11 h-11 rounded-xl bg-[#ff5a1f]/10 border-[1.5px] border-[#ff5a1f]/20 flex items-center justify-center text-xl text-[#ff5a1f]">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                    </div>
+                                    <span class="font-mono text-[11px] text-[#9a9590] tracking-wider">01</span>
+                                </div>
+                                <button class="service-toggle w-8 h-8 rounded-full border-[1.5px] border-[#dbd6ce] bg-[#f0ede8] flex items-center justify-center text-lg transition-all">+</button>
+                            </div>
+                            <h3 class="font-display font-black text-xl mb-3 tracking-tight leading-tight">Website Design & Development</h3>
+                            <p class="text-sm text-[#5a5753] leading-relaxed desc">Clean, fast, mobile-friendly websites built to convert. From portfolio sites to business landing pages.</p>
+                            <div class="service-detail hidden pt-5 border-t border-[#dbd6ce] mt-5">
+                                <div class="text-[11px] font-mono text-[#9a9590] tracking-wider mb-3 uppercase">What's Included</div>
+                                <ul class="list-none flex flex-col gap-3">
+                                    <li class="flex items-center gap-3 text-[13px] text-[#2a2926]"><span class="w-1.5 h-1.5 rounded-full bg-[#ff5a1f] shrink-0"></span>UI/UX planning & wireframe</li>
+                                    <li class="flex items-center gap-3 text-[13px] text-[#2a2926]"><span class="w-1.5 h-1.5 rounded-full bg-[#ff5a1f] shrink-0"></span>Content writing for all pages</li>
+                                    <li class="flex items-center gap-3 text-[13px] text-[#2a2926]"><span class="w-1.5 h-1.5 rounded-full bg-[#ff5a1f] shrink-0"></span>SEO-ready structure</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Additional cards will be rendered by JS for cleaner HTML -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="bg-white py-24 md:py-[140px] border-t-[1.5px] border-[#dbd6ce] overflow-hidden">
+                <div class="max-w-[1280px] mx-auto px-6 md:px-12 mb-16">
+                    <div class="flex items-center gap-3 mb-12">
+                        <span class="font-mono text-[11px] text-[#9a9590] tracking-[0.15em]">04 — PROJECTS</span>
+                        <div class="flex-1 h-[1.5px] bg-[#dbd6ce]"></div>
+                    </div>
+                    <h2 id="projects-heading" class="section-heading opacity-0">Work that<br/><span class="marker-yellow">speaks.</span></h2>
+                </div>
+                <div id="projects-marquee-container" class="relative w-screen cursor-grab overflow-hidden">
+                    <div class="absolute inset-x-0 inset-y-0 bg-gradient-to-r from-white via-transparent to-white z-10 pointer-events-none"></div>
+                    <div id="projects-track" class="flex gap-8 px-12 w-max items-stretch">
+                        <!-- Injected by script -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog -->
+            <section id="blog" class="bg-[#f0ede8] py-24 md:py-[120px] border-t-[1.5px] border-[#dbd6ce]">
+                <div class="max-w-[1280px] mx-auto px-6 md:px-12">
+                    <div class="flex items-center gap-3 mb-12">
+                        <span class="font-mono text-[11px] text-[#9a9590] tracking-[0.15em]">05 — BLOG</span>
+                        <div class="flex-1 h-[1.5px] bg-[#dbd6ce]"></div>
+                    </div>
+                    <div class="grid lg:grid-cols-[0.9fr_1.1fr] grid-cols-1 gap-16 lg:gap-24 items-start">
+                        <div class="lg:sticky top-[100px]">
+                            <h2 id="blog-heading" class="section-heading mb-6 opacity-0">Things I'm thinking<br /><span class="marker-yellow">about.</span></h2>
+                            <p class="text-[17px] text-[#5a5753] leading-relaxed max-w-[420px] mb-8">Student startup realities, branding lessons, AI tools, and the occasional life update — written honestly.</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse shadow-[0_0_8px_#22c55e]"></div>
+                                <span class="text-[11px] font-mono text-[#5a5753] tracking-widest uppercase">New post every 2 weeks</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-0 blog-list">
+                            <!-- Injected by script -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section id="contact" class="bg-[#111110] py-24 md:py-[140px] relative overflow-hidden">
+                <div class="absolute -bottom-[10%] -right-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,var(--orange)_0%,transparent_70%)] opacity-10 blur-[80px] pointer-events-none"></div>
+                <div class="max-w-[1280px] mx-auto px-6 md:px-12 relative z-10">
+                    <div class="flex items-center gap-3 mb-20">
+                        <span class="font-mono text-white/30 text-[11px] tracking-[0.2em]">06 — CONTACT</span>
+                        <div class="flex-1 h-[1.5px] bg-white/[0.08]"></div>
+                    </div>
+                    <div class="grid lg:grid-cols-[1.2fr_0.8fr] grid-cols-1 gap-20 lg:gap-32 items-center">
+                        <div>
+                            <h2 id="contact-heading" class="font-display font-black text-[clamp(2.8rem,8vw,5.5rem)] text-[#f0ede8] leading-[0.9] tracking-tighter mb-10 opacity-0">Let's build<br/>something<br/><span class="text-[#ff5a1f]">remarkable.</span></h2>
+                            <p class="text-xl text-white/50 leading-relaxed max-w-[520px]">I'm always open to new opportunities, collaborations, or just a friendly chat about branding and strategy.</p>
+                        </div>
+                        <div id="contact-list" class="flex flex-col gap-4">
+                            <!-- Injected by script -->
+                        </div>
+                    </div>
+
+                    <!-- Integrated Footer -->
+                    <div class="mt-40 pt-16 border-t border-white/[0.08] flex flex-col md:flex-row justify-between items-center gap-10">
+                        <div class="text-[13px] text-white/20 font-mono tracking-wider">© 2026 S. Philip Joel</div>
+                        <div class="flex gap-12">
+                            <a href="#" class="text-[13px] text-[#f0ede8] opacity-40 hover:opacity-100 hover:text-[#ff5a1f] transition-all tracking-[0.1em] uppercase font-medium">Instagram</a>
+                            <a href="https://linkedin.com/in/s-philipjoel-73b0a5290" target="_blank" class="text-[13px] text-[#f0ede8] opacity-40 hover:opacity-100 hover:text-[#ff5a1f] transition-all tracking-[0.1em] uppercase font-medium">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Scroll to Top -->
+        <button id="scroll-to-top" onclick="lenis.scrollTo(0)" class="fixed bottom-10 right-10 z-[3000] w-14 h-14 rounded-full bg-[#111110] text-[#f0ede8] border border-white/5 shadow-3xl flex items-center justify-center opacity-0 translate-y-8 scale-75 cursor-pointer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+>>>>>>> 072afe4 (Brief description of what you changed)
