@@ -1,62 +1,34 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
-export default function ScrollToTop() {
-  const [isVisible, setIsVisible] = useState(false)
+export default function ScrollToTop({ lenis }) {
+  const sttRef = useRef(null)
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset
+      const stt = sttRef.current
+      if (stt) {
+        if (currentScroll > 400) {
+          gsap.to(stt, { autoAlpha: 1, y: 0, scale: 1, duration: 0.4, pointerEvents: 'auto', ease: 'back.out(1.7)' })
+        } else {
+          gsap.to(stt, { autoAlpha: 0, y: 30, scale: 0.8, duration: 0.3, pointerEvents: 'none' })
+        }
       }
     }
-    window.addEventListener('scroll', toggleVisibility)
-    return () => window.removeEventListener('scroll', toggleVisibility)
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.button
-          initial={{ opacity: 0, y: 20, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.8 }}
-          onClick={scrollToTop}
-          style={{
-            position: 'fixed',
-            bottom: '40px',
-            right: '40px',
-            zIndex: 1000,
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-            background: 'var(--ink)',
-            color: 'var(--cream)',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-            fontSize: '20px'
-          }}
-          whileHover={{ scale: 1.1, translateY: -5 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
-          </svg>
-        </motion.button>
-      )}
-    </AnimatePresence>
+    <button 
+      id="scroll-to-top" 
+      ref={sttRef}
+      onClick={() => lenis?.scrollTo(0)} 
+      className="fixed bottom-10 right-10 z-[3000] w-14 h-14 rounded-full bg-[#111110] text-[#f0ede8] border border-white/5 shadow-3xl flex items-center justify-center opacity-0 translate-y-8 scale-75 cursor-pointer"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
   )
 }

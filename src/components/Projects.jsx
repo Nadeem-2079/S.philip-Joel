@@ -1,109 +1,71 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { motion, useAnimationFrame, useMotionValue } from 'framer-motion'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const projects = [
-  { id:1, title:'SV Little Leapsters Therapy Center', type:'Instagram Content Strategy · Personal Brand Strategy', desc:'Built a full Instagram content calendar for a pediatric therapy clinic in Chennai. Conducted competitive analysis of therapy clinics and developed a personal brand strategy for the founder.', tags:['Content Strategy','Branding','Healthcare'], color:'var(--teal)', year:'2024', image: '/leapsters.png' },
-  { id:2, title:'Lofty Learn (ECE Academy)', type:'Website Content · Branding', desc:'Content intake and information architecture for the website. Tagline development, brand messaging, logo direction and full website copy for an electronics engineering academy.', tags:['Web Content','Branding','Ed-Tech'], color:'var(--purple)', year:'2024', image: '/lofty.png' },
-  { id:3, title:'Ausdauer Groups', type:'Full Agency Brand Build', desc:'Built the agency brand from scratch — name, identity, tone of voice. Developed Instagram and LinkedIn presence. Created internal systems: service agreements, MoUs, onboarding templates. Led content team producing Tanglish reels using AIDA framework.', tags:['Branding','Content','Startup Ops'], color:'var(--orange)', year:'2024', image: '/ausdauer.png' },
-  { id:4, title:'Coming Soon', type:'New Project', desc:'Next case study dropping soon. Currently in progress — exciting work in branding and digital strategy.', tags:['TBA'], color:'var(--ink-faint)', year:'2025', placeholder:true, image: '/coming.png' },
-]
-
-// Duplicate projects for infinite loop
-const doubleProjects = [...projects, ...projects]
-
-function ProjectCard({ p }) {
-  return (
-    <div className="project-card" style={{ width: 380, flexShrink: 0, height: '100%', border: '1.5px solid var(--parchment)', borderRadius: 20, overflow: 'hidden', background: 'var(--white)' }}>
-      {/* Thumb */}
-      <div style={{ height:200, background: p.placeholder ? 'var(--warm)' : `linear-gradient(135deg, ${p.color}22, ${p.color}08)`, borderBottom:'1.5px solid var(--parchment)', display:'flex', alignItems:'center', justifyContent:'center', position:'relative', overflow: 'hidden' }}>
-         <img src={p.image} alt={p.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }} />
-         <div style={{ position:'absolute', top:16, right:16, padding:'4px 12px', background:p.placeholder?'var(--parchment)':'var(--ink)', borderRadius:100, fontSize:11, color:p.placeholder?'var(--ink-muted)':'var(--cream)', fontFamily:'JetBrains Mono,monospace', zIndex: 2 }}>{p.year}</div>
-      </div>
-      {/* Body */}
-      <div style={{ padding:28, background: 'var(--white)' }}>
-        <div style={{ fontSize:11, color:p.color === 'var(--ink-faint)' ? 'var(--ink-faint)' : p.color, fontFamily:'JetBrains Mono,monospace', letterSpacing:'0.08em', marginBottom:12, fontWeight:700 }}>{p.type}</div>
-        <h3 style={{ fontFamily:'Cabinet Grotesk,sans-serif', fontWeight:800, fontSize:20, color:'var(--ink)', marginBottom:12, lineHeight:1.25, letterSpacing:'-0.01em' }}>{p.title}</h3>
-        {!p.placeholder && <p style={{ fontSize:14, color:'var(--ink-muted)', lineHeight:1.7, marginBottom:20 }}>{p.desc}</p>}
-        <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-          {p.tags.map(t => (
-            <span key={t} className="tag-pill" style={{ color:p.placeholder?'var(--ink-faint)':p.color, borderColor: p.placeholder?'var(--parchment)':p.color+'55', fontSize:11, padding: '4px 10px' }}>{t}</span>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
+  { title:'SV Little Leapsters Therapy Center', type:'Instagram Content Strategy · Personal Brand Strategy', desc:'Built a full Instagram content calendar for a pediatric therapy clinic in Chennai.', tags:['Content Strategy','Branding','Healthcare'], color:'#0f9b8e', year:'2024', image: '/leapsters.png' },
+  { title:'Lofty Learn (ECE Academy)', type:'Website Content · Branding', desc:'Content intake and architecture. Tagline, brand messaging, and full website copy.', tags:['Web Content','Branding','Ed-Tech'], color:'#6b4de6', year:'2024', image: '/lofty.png' },
+  { title:'Ausdauer Groups', type:'Full Agency Brand Build', desc:'Built the agency brand from scratch — name, identity, tone of voice, systems.', tags:['Branding','Content','Startup Ops'], color:'#ff5a1f', year:'2024', image: '/ausdauer.png' },
+  { title:'Coming Soon', type:'New Project', desc:'Next case study dropping soon. Currently in progress — exciting work in branding.', tags:['TBA'], color:'#9a9590', year:'2025', image: '/coming.png' },
+];
 
 export default function Projects() {
-  const headRef = useRef(null)
-  const containerRef = useRef(null)
-  const x = useMotionValue(0)
+  const trackRef = useRef(null)
   const [isHovered, setIsHovered] = useState(false)
-  const [containerWidth, setContainerWidth] = useState(0)
+  const xP = useRef(0)
 
   useEffect(() => {
-    gsap.fromTo(headRef.current, { y:50, opacity:0 }, { y:0, opacity:1, duration:1, ease:'power3.out',
-      scrollTrigger: { trigger:headRef.current, start:'top 82%' }})
-    
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.scrollWidth / 2)
+    let animationFrameId
+    const marqueeLoop = () => {
+      const t = trackRef.current
+      if (t && !isHovered) {
+        xP.current -= 0.8
+        const limit = t.scrollWidth / 2
+        if (limit > 0 && Math.abs(xP.current) >= limit) {
+          xP.current = 0
+        }
+        t.style.transform = `translateX(${xP.current}px)`
+      }
+      animationFrameId = requestAnimationFrame(marqueeLoop)
     }
-  }, [])
-
-  useAnimationFrame((t, delta) => {
-    if (isHovered) return
-    
-    let moveBy = -0.8 // Speed of the marquee
-    let currentX = x.get()
-    
-    if (currentX <= -containerWidth) {
-      x.set(0)
-    } else {
-      x.set(currentX + moveBy)
-    }
-  })
+    animationFrameId = requestAnimationFrame(marqueeLoop)
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [isHovered])
 
   return (
-    <section id="projects" style={{ background:'var(--white)', padding:'140px 0', borderTop:'1.5px solid var(--parchment)', overflow:'hidden' }}>
-      <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 48px', marginBottom: 64 }}>
-        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:48 }}>
-          <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize:11, color:'var(--ink-faint)', letterSpacing:'0.15em' }}>04 — PROJECTS</span>
-          <div style={{ flex:1, height:'1.5px', background:'var(--parchment)' }} />
+    <section id="projects" className="bg-white py-24 md:py-[140px] border-t-[1.5px] border-[#dbd6ce] overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 mb-16">
+        <div className="flex items-center gap-3 mb-12">
+          <span className="font-mono text-[11px] text-[#9a9590] tracking-[0.15em]">04 — PROJECTS</span>
+          <div className="flex-1 h-[1.5px] bg-[#dbd6ce]"></div>
         </div>
-        <h2 ref={headRef} className="section-heading" style={{ opacity:0 }}>
-          Work that<br/><span className="marker-yellow">speaks.</span>
-        </h2>
+        <h2 id="projects-heading" className="section-heading opacity-0">Work that<br/><span className="marker-yellow">speaks.</span></h2>
       </div>
-
       <div 
-        style={{ position: 'relative', width: '100vw', cursor: 'grab' }}
+        id="projects-marquee-container" 
+        className="relative w-screen cursor-grab overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Gradient Masks */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg, var(--white) 0%, transparent 15%, transparent 85%, var(--white) 100%)', zIndex: 10, pointerEvents: 'none' }} />
-
-        <motion.div 
-          ref={containerRef}
-          style={{ x, display: 'flex', gap: 32, padding: '0 48px' }}
-          drag="x"
-          dragConstraints={{ left: -containerWidth * 1.5, right: 100 }}
-          onDragStart={() => setIsHovered(true)}
-          onDragEnd={() => {
-            setIsHovered(false)
-            // Loop adjustment if dragged too far
-            if (x.get() > 0) x.set(-containerWidth)
-            if (x.get() < -containerWidth) x.set(0)
-          }}
-        >
-          {doubleProjects.map((p, i) => (
-            <ProjectCard key={`${p.id}-${i}`} p={p} />
+        <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-r from-white via-transparent to-white z-10 pointer-events-none"></div>
+        <div id="projects-track" ref={trackRef} className="flex gap-8 px-12 w-max items-stretch">
+          {[...projects, ...projects].map((p, i) => (
+            <div key={i} className="project-card">
+              <div className="h-[200px] relative overflow-hidden flex items-center justify-center" style={{ background: `${p.color}15` }}>
+                <img src={p.image} alt={p.title} className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute top-4 right-4 px-3 py-1 bg-[#111110] rounded-full text-[11px] text-[#f0ede8] font-mono">{p.year}</div>
+              </div>
+              <div className="p-7 bg-white">
+                <div className="text-[11px] font-mono tracking-widest mb-3 font-bold" style={{ color: p.color }}>{p.type}</div>
+                <h3 className="font-display font-black text-xl text-[#111110] mb-3 leading-tight tracking-tight">{p.title}</h3>
+                <p className="text-sm text-[#5a5753] leading-relaxed mb-5">{p.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {p.tags.map((t, idx) => (
+                    <span key={idx} className="tag-pill" style={{ color: p.color, borderColor: `${p.color}44`, fontSize: '10px' }}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
